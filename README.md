@@ -96,3 +96,5 @@ and start the server
 ```
 docker run -d -v <your data path>:/data -p 80:80 json-server-faker customers.js --routes routes.json
 ```
+
+Want more, move to [Document](https://github.com/typicode/json-server#getting-started)
