@@ -84,3 +84,15 @@ You can test the service
 ```
 curl localhost/customers
 ```
+#### 3. Add routes
+Create routes.json
+```
+{
+  "/api/*": "/$1",
+  "/:resource/:id/show": "/:resource/:id"
+}
+```
+and start the server
+```
+docker run -d -v <your data path>:/data -p 80:80 json-server-faker customers.js --routes routes.json
+```
