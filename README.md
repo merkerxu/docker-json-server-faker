@@ -82,7 +82,7 @@ module.exports = () => {
 ```
 and start the server
 ```
-docker run -d -v <your data path>:/data -p 80:80 json-server-faker customers.js
+docker run -d -v <your data path>:/data -p 80:80 json-server-faker index.js
 ```
 You can test the service
 ```
