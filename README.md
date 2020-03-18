@@ -51,19 +51,25 @@ You can test the service
 curl localhost/posts/1
 ```
 #### 2. using a dynamic datasource 
-Create customers.js 
+Create index.js 
 ```
 var faker = require('faker')
 
-function generateCustomers() {
-    var customers = [];
+module.exports = () => {
+    const data = {users:[], customers:[]};
 
-    for (var id=0; id<50; id++) {
-        var firstName = faker.name.firstName();
-        var lastName  = faker.name.lastName();
-        var phoneNumber = faker.phone.phoneNumberFormat();
+    //create 20 users
+    for (let i=0; i<20; i++) {
+        data.users.push({id:i, name:`user${i}`})
+    }
 
-        customers.push({
+    //create 20 customers using faker.sj
+    for (let id=0; id<20; id++) {
+        let firstName = faker.name.firstName();
+        let lastName  = faker.name.lastName();
+        let phoneNumber = faker.phone.phoneNumberFormat();
+
+        data.customers.push({
             "id": id,
             "first_name": firstName,
             "last_name": lastName,
@@ -71,10 +77,8 @@ function generateCustomers() {
         })
     }
 
-    return {"customers": customers}
+    return data;
 }
-
-module.exports = generateCustomers
 ```
 and start the server
 ```
@@ -94,7 +98,7 @@ Create routes.json
 ```
 and start the server
 ```
-docker run -d -v <your data path>:/data -p 80:80 json-server-faker customers.js --routes routes.json
+docker run -d -v <your data path>:/data -p 80:80 json-server-faker index.js --routes routes.json
 ```
 
 Want more, move to [Document](https://github.com/typicode/json-server#getting-started)
